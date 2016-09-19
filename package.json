@@ -1,0 +1,17 @@
+{
+  "name": "echolot-website",
+  "version": "0.1.0",
+  "description": "Spread the wave",
+  "author": {
+    "name": "Björn Breitgoff",
+    "email": "syntheticore@gmail.com"
+  },
+  "dependencies": {
+    "declaire": "^0.3.9",
+    "eakwell": "^0.2.3",
+    "font-awesome": "*"
+  },
+  "scripts": {
+    "start": "node app.js"
+  }
+}

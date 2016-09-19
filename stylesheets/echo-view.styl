@@ -1,0 +1,82 @@
+.echo-view
+  overflow: hidden
+  
+  & > header
+    overflow: hidden
+    padding: 0 .25rem
+    h1
+      float: left
+      font-weight: 500
+      margin: .75rem .25rem
+      color: #333
+    button
+      float: left
+  
+  .charts
+    padding: 0 .5rem
+    display: block
+    li
+      background: whitesmoke
+      border-radius: 5px
+      border: 1px solid lightgray
+      margin-bottom: 0.5rem
+      width: 100%
+      overflow: hidden
+      position: relative
+      h3
+        padding: 0.5rem
+        background: linear-gradient(to bottom, #fff, #fafafa)
+        border-bottom: 1px solid #e0e0e0
+        box-shadow: 0 1px 3px rgba(0,0,0,0.07)
+        font-size: 0.9rem
+        position: relative
+
+  footer
+    height: 300px
+    .distance
+      display: block
+      width: 200px
+      height: 200px
+      margin: 6rem auto
+      font-weight: 500
+      border-radius: 50%
+      position: relative
+      text-align: center
+      background: white
+      border: 1px solid transparent
+      &.running::before
+        content: ''
+        display: block
+        position: absolute
+        width: calc(200%)
+        height: calc(200%)
+        border-radius: 50%
+        top: -50%
+        left: -50%
+        background: repeating-radial-gradient($main, transparent 1px, $main 40px)
+        z-index: -1
+        animation: pulse 3s ease-out
+        animation-iteration-count: infinite
+      &.running.obstacle::before
+        $alarm = red
+        background: repeating-radial-gradient($alarm, transparent 1px, $alarm 40px)
+      h2
+        font-size: 1.5rem
+        margin-top: 4.5rem
+        margin-bottom: 0.25rem
+        font-weight: 600
+        color: $black
+      span
+        color: $main
+        font-weight: 400
+        font-size: 2rem
+
+@keyframes 'pulse'
+  0%
+    transform: scale(0.5)
+    opacity: 0.0
+  30%
+    opacity: 0.5
+  100%
+    transform: scale(1)
+    opacity: 0.0
