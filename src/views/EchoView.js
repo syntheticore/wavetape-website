@@ -5,22 +5,28 @@ var _ = declaire.utils;
 module.exports = declaire.ViewModel('EchoView', {
   width: 400,
   height: 100,
+
   running: false,
   obstacle: false,
-  radar: new Wavetape(),
   distance: 0,
+
+  temperature: 20,
+  rate: 150,
+  delay: 84,
+  frequency: 12000,
+  kernel: 32,
+  pulseLength: 2,
 
   toggle: function() {
     var self = this;
     var running = self.get('running');
-    var radar = self.get('radar');
     if(running) {
-      radar.stop();
+      self.radar.stop();
     } else {
       var freqCtx = document.getElementById('frequency-canvas').getContext('2d');
       var waveCtx = document.getElementById('waveform-canvas').getContext('2d');
       var signalCtx = document.getElementById('signal-canvas').getContext('2d');
-      radar.start(function(distance) {
+      self.radar.start(function(distance) {
         // Update UI with measurement
         self.set('distance', distance.toFixed(2));
         self.set('obstacle', distance < 0.6);
@@ -42,11 +48,19 @@ module.exports = declaire.ViewModel('EchoView', {
 }, function() {
   var self = this;
   if(_.onClient()) {
+    self.radar = new Wavetape();
     self.resize();
     window.addEventListener('resize', function() {
       if(!self.get('running')) {
         self.resize();
       }
+    });
+    self.on('change', function() {
+      self.radar.measureRate = parseInt(self.get('rate'));
+      self.radar.waitTime = parseInt(self.get('delay'));
+      self.radar.frequency = parseInt(self.get('frequency'));
+      self.radar.filterKernel = parseInt(self.get('kernel'));
+      self.radar.pulseLength = parseFloat(self.get('pulseLength'));
     });
   }
 });
