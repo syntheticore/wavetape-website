@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "declaire": "^0.3.9",
-    "eakwell": "^0.2.3",
+    "wavetape": "^0.1.1",
     "font-awesome": "*"
   },
   "scripts": {

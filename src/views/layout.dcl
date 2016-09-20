@@ -23,13 +23,17 @@ body
             | Start
 
       ul.charts
-        //- li
-        //-   h3 Time Domain
-        //-   canvas#frequency-canvas(width="{width}" height="{height}")
+        li
+          h3 Frequency
+          canvas#frequency-canvas(width="{width}" height="{height}")
+
+        li
+          h3 Time Domain
+          canvas#waveform-canvas(width="{width}" height="{height}")
         
         li
           h3 Signal
-          canvas#waveform-canvas(width="{width}" height="{height}")
+          canvas#signal-canvas(width="{width}" height="{height}")
 
       footer
         .distance(class="{running: running, obstacle: obstacle}")
