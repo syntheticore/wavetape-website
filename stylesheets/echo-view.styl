@@ -4,6 +4,8 @@
   & > header
     overflow: hidden
     padding: 0 .25rem
+    & > *
+      margin: .5rem .25rem
     h1
       float: left
       font-weight: 500
@@ -11,19 +13,26 @@
       color: #333
     button
       float: left
-    
-    form
-      clear: both
-      padding: 0 0.5rem
-      label
-        display: block
-        margin: 0.5rem 0
-        font-size: 0.8rem
-        color: $gray1
-      input
-        margin-right: 0.5rem
-        width: calc(100% - 8rem)
+    & > label
+      float: right
+      margin: 0.8rem .25rem
+      input[type="checkbox"]
+        margin-left: 0.5rem
   
+  label
+    font-size: 0.8rem
+    color: $gray1
+  
+  form
+    clear: both
+    padding: 0 0.5rem
+    label
+      display: block
+      margin: 0.5rem 0
+    input[type="range"]
+      margin-right: 0.5rem
+      width: calc(100% - 8rem)
+
   .charts
     padding: 0 .5rem
     display: block
@@ -35,13 +44,17 @@
       width: 100%
       overflow: hidden
       position: relative
-      h3
+      header
         padding: 0.5rem
         background: linear-gradient(to bottom, #fff, #fafafa)
         border-bottom: 1px solid #e0e0e0
         box-shadow: 0 1px 3px rgba(0,0,0,0.07)
-        font-size: 0.9rem
         position: relative
+      h3
+        font-size: 0.9rem
+        display: inline-block
+      input
+        float: right
 
   footer
     height: 300px

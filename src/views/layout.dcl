@@ -22,6 +22,11 @@ body
           {{=>}}
             | Start
 
+        label
+          span Debug
+          input(type="checkbox" checked="{debug!}")
+
+      {{if debug}}
         form
           label
             input(type="range" min="-10" max="45" value="{temperature!}")
@@ -42,18 +47,24 @@ body
             input(type="range" min="0.1" max="20" step="0.1" value="{pulseLength!}")
             span Pulse Length ({pulseLength})
 
-      ul.charts
-        li
-          h3 Frequency
-          canvas#frequency-canvas(width="{width}" height="{height}")
+        ul.charts
+          li
+            header
+              h3 Frequency
+              input(type="checkbox" checked="{showFrequency!}")
+            canvas#frequency-canvas(width="{width}" height="{height}")
 
-        li
-          h3 Time Domain
-          canvas#waveform-canvas(width="{width}" height="{height}")
-        
-        li
-          h3 Signal
-          canvas#signal-canvas(width="{width}" height="{height}")
+          li
+            header
+              h3 Time Domain
+              input(type="checkbox" checked="{showWaveform!}")
+            canvas#waveform-canvas(width="{width}" height="{height}")
+          
+          li
+            header
+              h3 Signal
+              input(type="checkbox" checked="{showSignal!}")
+            canvas#signal-canvas(width="{width}" height="{height}")
 
       footer
         .distance(class="{running: running, obstacle: obstacle}")
