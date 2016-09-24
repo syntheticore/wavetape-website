@@ -33,15 +33,12 @@ body
             span Temperature ({temperature})
           label
             input(type="range" max="200" value="{rate!}")
-            span Measure rate ({rate})
-          label
-            input(type="range" max="200" value="{delay!}")
-            span Delay ({delay})
+            span Window ({rate})
           label
             input(type="range" min="1000" max="17000" value="{frequency!}")
             span Frequency ({frequency})
           label
-            input(type="range" min="2" max="128" value="{kernel!}")
+            input(type="range" min="4" max="128" value="{kernel!}")
             span Filter Kernel ({kernel})
           label
             input(type="range" min="0.1" max="20" step="0.1" value="{pulseLength!}")
@@ -50,19 +47,7 @@ body
         ul.charts
           li
             header
-              h3 Frequency
-              input(type="checkbox" checked="{showFrequency!}")
-            canvas#frequency-canvas(width="{width}" height="{height}")
-
-          li
-            header
-              h3 Time Domain
-              input(type="checkbox" checked="{showWaveform!}")
-            canvas#waveform-canvas(width="{width}" height="{height}")
-          
-          li
-            header
-              h3 Signal
+              h3 Signal (0 - {maxRange} m)
               input(type="checkbox" checked="{showSignal!}")
             canvas#signal-canvas(width="{width}" height="{height}")
 

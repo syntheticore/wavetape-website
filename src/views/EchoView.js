@@ -9,18 +9,17 @@ module.exports = declaire.ViewModel('EchoView', {
   running: false,
   obstacle: false,
   distance: 0,
+  maxRange: 0,
 
   debug: true,
-  showFrequency: true,
-  showWaveform: true,
   showSignal: true,
 
   temperature: 20,
-  rate: 190,
+  rate: 120,
   delay: 22,
-  frequency: 12000,
+  frequency: 10859,
   kernel: 32,
-  pulseLength: 2,
+  pulseLength: 4,
 
   toggle: function() {
     var self = this;
@@ -30,15 +29,12 @@ module.exports = declaire.ViewModel('EchoView', {
     } else {
       var drawBuffers;
       if(self.get('debug')) {
-        var freqCtx = document.getElementById('frequency-canvas').getContext('2d');
-        var waveCtx = document.getElementById('waveform-canvas').getContext('2d');
         var signalCtx = document.getElementById('signal-canvas').getContext('2d');
         drawBuffers = function(data) {
-          if(self.get('showFrequency')) drawData(data.frequency, freqCtx, 1/256);
-          if(self.get('showWaveform'))  drawData(data.waveform, waveCtx, 1/256);
-          if(self.get('showSignal'))    drawData(data.signal, signalCtx, 16, data);
+          if(self.get('showSignal')) drawData(data.signal, signalCtx, 8, data);
         };
       }
+      self.set('maxRange', self.radar.getMaxRange().toFixed(2));
       self.radar.start(function(distance) {
         // Update UI with measurement
         self.set('distance', distance.toFixed(2));
@@ -69,8 +65,7 @@ module.exports = declaire.ViewModel('EchoView', {
       }
     });
     self.on('change', function() {
-      self.radar.measureRate = parseInt(self.get('rate'));
-      self.radar.waitTime = parseInt(self.get('delay'));
+      self.radar.measureTime = parseInt(self.get('rate'));
       self.radar.frequency = parseInt(self.get('frequency'));
       self.radar.filterKernel = parseInt(self.get('kernel'));
       self.radar.pulseLength = parseFloat(self.get('pulseLength'));
