@@ -59,12 +59,6 @@ module.exports = declaire.ViewModel('EchoView', {
 
   if(_.onClient()) {
     self.radar = new Wavetape();
-    self.resize();
-    window.addEventListener('resize', function() {
-      if(!self.get('running')) {
-        self.resize();
-      }
-    });
     self.on('change', function() {
       self.radar.measureTime = parseInt(self.get('rate'));
       self.radar.frequency = parseInt(self.get('frequency'));
@@ -76,6 +70,12 @@ module.exports = declaire.ViewModel('EchoView', {
     });
     self.on('remove', function() {
       self.radar.stop();
+    });
+    self.resize();
+    window.addEventListener('resize', function() {
+      if(!self.get('running')) {
+        self.resize();
+      }
     });
   }
 });
