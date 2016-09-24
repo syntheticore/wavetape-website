@@ -14,44 +14,57 @@ body
   {{view EchoView}}
     .echo-view
       header
-        h1 Echolot
+        a(href="http://github.com/syntheticore/wavetape")
+          i.fa.fa-github
+          i.fa.fa-npm
+        h1 Wavetape<span>.js</span>
+        h2 Measure real-world distances on mobile devices using near-ultrasound 
+        //- label
+        //-   span Debug
+        //-   input(type="checkbox" checked="{debug!}")
 
-        button({{on click toggle}})
+      section#demo
+        {{if debug}}
+          //- form
+          //-   label
+          //-     input(type="range" min="-10" max="45" value="{temperature!}")
+          //-     span Temperature ({temperature})
+          //-   label
+          //-     input(type="range" max="200" value="{rate!}")
+          //-     span Window ({rate})
+          //-   label
+          //-     input(type="range" min="1000" max="17000" value="{frequency!}")
+          //-     span Frequency ({frequency})
+          //-   label
+          //-     input(type="range" min="4" max="128" value="{kernel!}")
+          //-     span Filter Kernel ({kernel})
+          //-   label
+          //-     input(type="range" min="0.1" max="20" step="0.1" value="{pulseLength!}")
+          //-     span Pulse Length ({pulseLength})
+        button.distance(class="{running: running, obstacle: obstacle}" {{on click toggle}})
           {{if running}}
-            | Stop
+            h2 Distance
+            span {distance} m
           {{=>}}
-            | Start
+            h2 Demo
 
-        label
-          span Debug
-          input(type="checkbox" checked="{debug!}")
-
-      {{if debug}}
-        form
-          label
-            input(type="range" min="-10" max="45" value="{temperature!}")
-            span Temperature ({temperature})
-          label
-            input(type="range" max="200" value="{rate!}")
-            span Window ({rate})
-          label
-            input(type="range" min="1000" max="17000" value="{frequency!}")
-            span Frequency ({frequency})
-          label
-            input(type="range" min="4" max="128" value="{kernel!}")
-            span Filter Kernel ({kernel})
-          label
-            input(type="range" min="0.1" max="20" step="0.1" value="{pulseLength!}")
-            span Pulse Length ({pulseLength})
-
-        ul.charts
+        ul.charts(class="{running: running}")
           li
-            header
-              h3 Signal (0 - {maxRange} m)
-              input(type="checkbox" checked="{showSignal!}")
+            //- header
+            //-   h3 Signal (0 - {maxRange} m)
+            //-   input(type="checkbox" checked="{showSignal!}")
             canvas#signal-canvas(width="{width}" height="{height}")
 
-      footer
-        .distance(class="{running: running, obstacle: obstacle}")
-          h2 Distance
-          span {distance} m
+      section#instructions
+        h3 Install using NPM
+        pre
+          code+
+            $ npm install wavetape --save
+
+        h3 Run in the browser
+        pre
+          code+
+            var radar = new Wavetape();
+            radar.start(function(distance) {
+              radar.stop();
+            });

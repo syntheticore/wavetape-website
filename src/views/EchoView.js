@@ -46,12 +46,13 @@ module.exports = declaire.ViewModel('EchoView', {
       }, drawBuffers);
     }
     self.set('running', !running);
+    // self.resize();
   },
 
   resize: function() {
     var width = document.getElementById('signal-canvas').parentNode.offsetWidth;
     this.set('width', width * 1);
-    this.set('height', Math.round(width / 4));
+    // this.set('height', Math.round(width / 4));
   }
 }, function() {
   var self = this;
@@ -84,8 +85,7 @@ var drawData = function(data, ctx, scale, signals) {
   var w = ctx.canvas.width;
   var h = ctx.canvas.height;
   // Draw buffer
-  ctx.fillStyle = 'rgb(245, 245, 245)';
-  ctx.fillRect(0, 0, w, h);
+  ctx.clearRect(0, 0, w, h);
   ctx.lineWidth = 1;
   ctx.strokeStyle = 'rgb(26, 166, 210)';
   ctx.beginPath();

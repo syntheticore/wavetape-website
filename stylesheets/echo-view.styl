@@ -1,75 +1,87 @@
 .echo-view
+  margin: 0 auto
+  max-width: 400px
+  height: 100vh
+  padding: 1rem
+  // box-shadow: 0 0px 40px alpha($main, 0.4)
   overflow: hidden
+  // border-left: 1px solid $main
+  // border-right: 1px solid $main
   
   & > header
     overflow: hidden
     padding: 0 .25rem
     & > *
       margin: .5rem .25rem
+    a
+      float: right
+      font-size: 2.1rem
+      color: $black
+      transition: all 0.2s
+      &:hover
+        color: $main
     h1
-      float: left
+      // float: left
       font-weight: 500
       margin: .75rem .25rem
       color: #333
-    button
-      float: left
-    & > label
-      float: right
-      margin: 0.8rem .25rem
-      input[type="checkbox"]
-        margin-left: 0.5rem
-  
-  label
-    font-size: 0.8rem
-    color: $gray1
-  
-  form
-    clear: both
-    padding: 0 0.5rem
-    label
-      display: block
-      margin: 0.5rem 0
-    input[type="range"]
-      margin-right: 0.5rem
-      width: calc(100% - 8rem)
+      font-size: 1.5rem
+      // display: block
+      span
+        color: $main
+    h2
+      color: $gray2
+      max-width: 18rem
+      line-height: 1.4
+      font-size: 0.9rem
 
-  .charts
-    padding: 0 .5rem
+    // button
+    //   float: left
+    // & > label
+    //   float: right
+    //   margin: 0.8rem .25rem
+    //   input[type="checkbox"]
+    //     margin-left: 0.5rem
+  
+  // label
+  //   font-size: 0.8rem
+  //   color: $gray1
+  
+  // form
+  //   clear: both
+  //   padding: 0 0.5rem
+  //   label
+  //     display: block
+  //     margin: 0.5rem 0
+  //   input[type="range"]
+  //     margin-right: 0.5rem
+  //     width: calc(100% - 8rem)
+
+  .distance
     display: block
-    li
-      background: whitesmoke
-      border-radius: 5px
-      border: 1px solid lightgray
-      margin-bottom: 0.5rem
-      width: 100%
-      overflow: hidden
-      position: relative
-      header
-        padding: 0.5rem
-        background: linear-gradient(to bottom, #fff, #fafafa)
-        border-bottom: 1px solid #e0e0e0
-        box-shadow: 0 1px 3px rgba(0,0,0,0.07)
-        position: relative
-      h3
-        font-size: 0.9rem
-        display: inline-block
-      input
-        float: right
-
-  footer
-    height: 300px
-    .distance
-      display: block
-      width: 200px
-      height: 200px
-      margin: 6rem auto
-      font-weight: 500
-      border-radius: 50%
-      position: relative
-      text-align: center
-      background: white
-      border: 1px solid transparent
-      &.running::before
+    width: 200px
+    height: 200px
+    margin: 2rem auto
+    font-weight: 500
+    border-radius: 50%
+    position: relative
+    text-align: center
+    background: white
+    border: 1px solid transparent
+    transition: all 0.4s
+    box-shadow: 0 0px 8px $main
+    &:hover
+      border: 1px solid $main
+      h2
+        color: $black
+    &:active
+      box-shadow: inset 0 0px 8px $main
+    &.running
+      text-transform: none
+      box-shadow: inset 0 0px 8px $main
+      h2
+        color: $black
+      &::before
         content: ''
         display: block
         position: absolute
@@ -82,26 +94,74 @@
         z-index: -1
         animation: pulse 3s ease-out
         animation-iteration-count: infinite
-      &.running.obstacle::before
+      &.obstacle::before
         $alarm = red
         background: repeating-radial-gradient($alarm, transparent 1px, $alarm 40px)
-      h2
-        font-size: 1.5rem
-        margin-top: 4.5rem
-        margin-bottom: 0.25rem
-        font-weight: 600
-        color: $black
-      span
-        color: $main
-        font-weight: 400
-        font-size: 2rem
+    h2
+      font-size: 1.5rem
+      // margin-top: 1rem
+      // margin-bottom: 0.25rem
+      font-weight: 600
+      color: $gray2
+      transition: all 0.4s
+    span
+      color: $main
+      font-weight: 400
+      font-size: 2rem
 
-@keyframes 'pulse'
-  0%
-    transform: scale(0.5)
-    opacity: 0.0
-  30%
-    opacity: 0.5
-  100%
-    transform: scale(1)
-    opacity: 0.0
+  @keyframes 'pulse'
+    0%
+      transform: scale(0.5)
+      opacity: 0.0
+    30%
+      opacity: 0.5
+    100%
+      transform: scale(1)
+      opacity: 0.0
+
+  .charts
+    padding: 0 .5rem
+    display: block
+    // z-index: -2
+    // position: relative
+    &.running
+      li
+        opacity: 1
+        height: 52px
+    li
+      opacity: 0
+      height: 0px
+      transition: all 1s
+      background: alpha(#f9f9f9, 0.8)
+      border-radius: 800px
+      border: 1px solid lightgray
+      margin-bottom: 0.5rem
+      width: 100%
+      overflow: hidden
+      position: relative
+      // box-shadow: inset 0 1px 8px alpha($main, 0.5)
+      header
+        padding: 0.5rem
+        background: linear-gradient(to bottom, #fff, #fafafa)
+        border-bottom: 1px solid #e0e0e0
+        box-shadow: $shadow
+        position: relative
+      h3
+        font-size: 0.9rem
+        display: inline-block
+      input
+        float: right
+  
+  #instructions
+    margin-top: 2rem
+    line-height: 2
+    h3
+      font-size: 1.2rem
+      font-weight: bold
+      // margin: 1rem 0
+      color: $black
+    code
+      color: $gray1
+      font-family: monospace
+      // font-size: 1rem
+      line-height: 2
